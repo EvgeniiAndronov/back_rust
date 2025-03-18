@@ -4,22 +4,24 @@ fn main() {
     piramide_creator(size_sq, size_sq);
 }
 
-fn writter(line: Vec<String>) {
+fn writter(line: Vec<String>) -> String {
+    let mut l: String = String::new();
     for i in line {
-        print!("{}", i);
+        l += &format!("{}", i);
     }
-    print!("\n");
+    l += "\n";
+    l
 }
 
 fn piramide_creator(size: i8, n: i8) {
     let mut i = 1;
     loop {
         let res = create_line(size, i);
-        writter(res);
+        println!("{}", writter(res));
         i += 2;
         if i >= n {
             let res = create_line(size, i);
-            writter(res);
+            println!("{}", writter(res));
             break;
         }
     }
@@ -38,4 +40,15 @@ fn create_line(size: i8, n: i8) -> Vec<String> {
     }
 
     line
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn it_works() {
+        let test_v: Vec<String> = vec![" ".to_string(), "-".to_string(), " ".to_string()];
+        let test_a: String = " - \n".to_string();
+        assert_eq!(writter(test_v), test_a);
+    }
 }
