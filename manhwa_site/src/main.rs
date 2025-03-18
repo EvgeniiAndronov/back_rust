@@ -1,22 +1,41 @@
-use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
+fn main() {
+    let size_sq: i8 = 40;
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello!")
+    piramide_creator(size_sq, size_sq);
 }
 
-async fn man_h() -> impl Responder {
-    HttpResponse::Ok().body("impl hi!")
+fn writter(line: Vec<String>) {
+    for i in line {
+        print!("{}", i);
+    }
+    print!("\n");
 }
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-        .service(hello)
-        .route("/impl", web::get().to(man_h))
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+fn piramide_creator(size: i8, n: i8) {
+    let mut i = 1;
+    loop {
+        let res = create_line(size, i);
+        writter(res);
+        i += 2;
+        if i >= n {
+            let res = create_line(size, i);
+            writter(res);
+            break;
+        }
+    }
+}
+
+fn create_line(size: i8, n: i8) -> Vec<String> {
+    let mut line: Vec<String> = vec![];
+    for _ in 0..(size/2 - n/2) {
+        line.push(" ".to_string());
+    }
+    for _ in 0..n {
+        line.push("-".to_string());
+    }
+    for _ in 0..(size/2 - n/2) {
+        line.push(" ".to_string());
+    }
+
+    line
 }
