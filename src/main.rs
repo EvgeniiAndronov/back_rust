@@ -1,5 +1,5 @@
 fn main() {
-    let size_sq: i8 = 40;
+    let size_sq: i8 = 127;
 
     piramide_creator(size_sq, size_sq);
 }
@@ -46,7 +46,7 @@ fn create_line(size: i8, n: i8) -> Vec<String> {
 mod tests {
     use super::*;
     #[test]
-    fn it_works() {
+    fn writter_test() {
         let test_v: Vec<String> = vec![" ".to_string(), "-".to_string(), " ".to_string()];
         let test_a: String = " - \n".to_string();
         assert_eq!(writter(test_v), test_a);
